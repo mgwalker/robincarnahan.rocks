@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <style type="text/css">
+      body {
+        font-family: sans-serif;
+      }
+
+      #everything {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #❤️ {
+        font-size: 32px;
+        font-weight: bold;
+        text-align: center;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+      }
+
+      #state {
+        position: fixed;
+        font-size: 24px;
+        text-shadow: 1px 1px 0 black, -1px 1px 0 black, -1px -1px 0 black,
+          1px -1px 0 black, 0 0 5px black;
+        color: white;
+        bottom: 10px;
+        left: 10px;
+      }
+
+      #building {
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: 100vw;
+      }
+    </style>
+  </head>
+  <body>
+    <img id="building" />
+    <div id="state"></div>
+    <div id="everything">
+      <div id="❤️"></div>
+    </div>
+    <script type="text/javascript" src="main.js"></script>
+  </body>
+</html>
