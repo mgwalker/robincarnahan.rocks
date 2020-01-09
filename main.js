@@ -61,7 +61,20 @@ const buildings = [
   ["Connecticut: The Eastern Bloc Hotel", "ct-eastern-bloc.jpg"],
   ["Captain Robin takes to the skies!", "robin-flying.jpg"],
   ["Lasso you up some savings!", "robin-lasso.jpg"],
-  ["Robin the Cost-Saver", "robin-savings.jpg"]
+  ["Robin the Cost-Saver", "robin-savings.jpg"],
+  ["Connecticut: Peacing Out", "ct-peace.jpg"],
+  ["Running by the Lincoln Memorial", "dc-running.jpg"],
+  ["California: Hanging with friends at the Statehouse", "ca-tour.jpg"],
+  ["MESC 2017: Mission accomplished, Baltimore!", "mesc-2017.jpg"],
+  ["Missouri: Statehouse under construction!", "mo-construction.jpg"],
+  ["Horses are awesome", "robin-horse.jpg"],
+  ["", "robin-horseback.jpg"],
+  ["Robin the Mushroom Farmer", "robin-mushroom-farmer.jpg"],
+  ["Mushrooms!", "robin-mushrooms.jpg"],
+  ["Texas: Don't mess with Texas", "tx-cop.jpg"],
+  ["Vermont: Nice place to run", "vt-running.jpg"],
+  ["Ohio: Stepping up to public service", "oh-steps.jpg"],
+  ["Hello statehouse!", "statehouse.jpg"]
 ];
 
 const backups = [];
