@@ -1,3 +1,5 @@
+const loveLetters = [];
+
 const buildings = [
   ["Alaska", "ak.jpg"],
   ["Alabama", "al.jpg"],
@@ -53,29 +55,82 @@ const buildings = [
   ["Washington", "wa.jpg"],
   ["Wisconsin", "wi.jpg"],
   ["West Virginia", "wv.jpg"],
-  ["Wyoming", "wy.jpg"]
+  ["Wyoming", "wy.jpg"],
+  ["Connecticut: That guy knows the way!", "ct-guy.jpg"],
+  ["The Genius of Connecticut, from the State Capitol", "ct-genius.jpg"],
+  ["Connecticut: The Eastern Bloc Hotel", "ct-eastern-bloc.jpg"],
+  ["Captain Robin takes to the skies!", "robin-flying.jpg"],
+  ["Lasso you up some savings!", "robin-lasso.jpg"],
+  ["Robin the Cost-Saver", "robin-savings.jpg"],
+  ["Connecticut: Peacing Out", "ct-peace.jpg"],
+  ["Running by the Lincoln Memorial", "dc-running.jpg"],
+  ["California: Hanging with friends at the Statehouse", "ca-tour.jpg"],
+  ["MESC 2017: Mission accomplished, Baltimore!", "mesc-2017.jpg"],
+  ["Missouri: Statehouse under construction!", "mo-construction.jpg"],
+  ["Horses are awesome", "robin-horse.jpg"],
+  ["", "robin-horseback.jpg"],
+  ["Robin the Mushroom Farmer", "robin-mushroom-farmer.jpg"],
+  ["Mushrooms!", "robin-mushrooms.jpg"],
+  ["Texas: Don't mess with Texas", "tx-cop.jpg"],
+  ["Vermont: Nice place to run", "vt-running.jpg"],
+  ["Ohio: Stepping up to public service", "oh-steps.jpg"],
+  ["Hello statehouse!", "statehouse.jpg"]
 ];
 
-const random = list => list[Math.floor(Math.random() * list.length)];
+const backups = [];
 
-const getLoveLetters = async () =>
-  (await (await fetch("💌.txt")).text()).split("\n");
+const random = list => {
+  const backup =
+    backups.find(({ backup }) => backup === list) ||
+    backups[
+      backups.push({
+        backup: list,
+        items: []
+      }) - 1
+    ];
 
-const setLoveLetter = letter => {
-  document.getElementById("❤️").innerText = letter;
+  if (list.length === 0) {
+    list.push(...backup.items);
+    backup.items.length = 0;
+  }
+
+  const i = Math.floor(Math.random() * list.length);
+
+  const item = list[i];
+  backup.items.push(item);
+  list.splice(i, 1);
+
+  return item;
+};
+
+const getLoveLetters = async () => {
+  const response = await fetch("💌.txt");
+  const letters = await response.text();
+  loveLetters.push(...letters.split("\n").filter(t => t.length > 0));
+};
+
+const setLoveLetter = () => {
+  document.getElementById("❤️").innerText = random(loveLetters);
 };
 
 const setStateBackground = () => {
   const [name, img] = random(buildings);
-  document.getElementById("building").src = `buildings/${img}`;
+  document.getElementById(
+    "everything"
+  ).style.backgroundImage = `url(buildings/${img})`;
   document.getElementById("state").innerText = name;
 };
 
 const onLoad = async () => {
   setStateBackground();
 
-  const loveLetters = await getLoveLetters();
-  setLoveLetter(random(loveLetters));
+  await getLoveLetters();
+  setLoveLetter();
 };
 
 window.addEventListener("DOMContentLoaded", onLoad);
+
+window.addEventListener("click", () => {
+  setLoveLetter();
+  setStateBackground();
+});
