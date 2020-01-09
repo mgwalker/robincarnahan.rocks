@@ -1,3 +1,5 @@
+const loveLetters = [];
+
 const buildings = [
   ["Alaska", "ak.jpg"],
   ["Alabama", "al.jpg"],
@@ -57,18 +59,46 @@ const buildings = [
   ["Connecticut: That guy knows the way!", "ct-guy.jpg"],
   ["The Genius of Connecticut, from the State Capitol", "ct-genius.jpg"],
   ["Connecticut: The Eastern Bloc Hotel", "ct-eastern-bloc.jpg"],
-  ["", "robin-flying.jpg"],
-  ["", "robin-lasso.jpg"],
+  ["Captain Robin takes to the skies!", "robin-flying.jpg"],
+  ["Lasso you up some savings!", "robin-lasso.jpg"],
   ["Robin the Cost-Saver", "robin-savings.jpg"]
 ];
 
-const random = list => list[Math.floor(Math.random() * list.length)];
+const backups = [];
 
-const getLoveLetters = async () =>
-  (await (await fetch("💌.txt")).text()).split("\n");
+const random = list => {
+  const backup =
+    backups.find(({ backup }) => backup === list) ||
+    backups[
+      backups.push({
+        backup: list,
+        items: []
+      }) - 1
+    ];
 
-const setLoveLetter = letter => {
-  document.getElementById("❤️").innerText = letter;
+  if (list.length === 0) {
+    list.push(...backup.items);
+    backup.items.length = 0;
+  }
+
+  const i = Math.floor(Math.random() * list.length);
+
+  const item = list[i];
+  backup.items.push(item);
+  list.splice(i, 1);
+
+  return item;
+};
+
+const getLoveLetters = async () => {
+  const response = await fetch("💌.txt");
+  const letters = await response.text();
+  loveLetters.push(...letters.split("\n"));
+};
+
+const setLoveLetter = () => {
+  console.log(loveLetters.length);
+  document.getElementById("❤️").innerText = random(loveLetters);
 };
 
 const setStateBackground = () => {
@@ -82,8 +112,13 @@ const setStateBackground = () => {
 const onLoad = async () => {
   setStateBackground();
 
-  const loveLetters = await getLoveLetters();
-  setLoveLetter(random(loveLetters));
+  await getLoveLetters();
+  setLoveLetter();
 };
 
 window.addEventListener("DOMContentLoaded", onLoad);
+
+window.addEventListener("click", () => {
+  setLoveLetter();
+  setStateBackground();
+});
