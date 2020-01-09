@@ -93,7 +93,7 @@ const random = list => {
 const getLoveLetters = async () => {
   const response = await fetch("💌.txt");
   const letters = await response.text();
-  loveLetters.push(...letters.split("\n"));
+  loveLetters.push(...letters.split("\n").filter(t => t.length > 0));
 };
 
 const setLoveLetter = () => {
