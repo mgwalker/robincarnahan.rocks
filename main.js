@@ -53,7 +53,13 @@ const buildings = [
   ["Washington", "wa.jpg"],
   ["Wisconsin", "wi.jpg"],
   ["West Virginia", "wv.jpg"],
-  ["Wyoming", "wy.jpg"]
+  ["Wyoming", "wy.jpg"],
+  ["Connecticut: That guy knows the way!", "ct-guy.jpg"],
+  ["The Genius of Connecticut, from the State Capitol", "ct-genius.jpg"],
+  ["Connecticut: The Eastern Bloc Hotel", "ct-eastern-bloc.jpg"],
+  ["", "robin-flying.jpg"],
+  ["", "robin-lasso.jpg"],
+  ["Robin the Cost-Saver", "robin-savings.jpg"]
 ];
 
 const random = list => list[Math.floor(Math.random() * list.length)];
@@ -67,7 +73,9 @@ const setLoveLetter = letter => {
 
 const setStateBackground = () => {
   const [name, img] = random(buildings);
-  document.getElementById("building").src = `buildings/${img}`;
+  document.getElementById(
+    "everything"
+  ).style.backgroundImage = `url(buildings/${img})`;
   document.getElementById("state").innerText = name;
 };
 
