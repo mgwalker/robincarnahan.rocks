@@ -97,7 +97,6 @@ const getLoveLetters = async () => {
 };
 
 const setLoveLetter = () => {
-  console.log(loveLetters.length);
   document.getElementById("❤️").innerText = random(loveLetters);
 };
 
